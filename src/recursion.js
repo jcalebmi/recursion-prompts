@@ -274,11 +274,11 @@ var countValuesInObj = function(obj, value) {
 var replaceKeysInObj = function(obj, oldKey, newKey) {
     for (var key in obj) {
         if (key === oldKey) {
-            key = newKey;
-
+            obj[newKey] = obj[oldKey];
+            delete obj[key];
         }
-        if (typeof key === 'object') {
-            return replaceKeysInObj(key, oldKey, newKey);
+        if (typeof obj[key] === 'object') {
+              replaceKeysInObj(obj[key], oldKey, newKey);
         }
     }
 
